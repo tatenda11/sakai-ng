@@ -50,6 +50,7 @@ import { collectionGroup, getDocs } from '@angular/fire/firestore';
 })
 export class LedgerComponent {
   stats!: any[]; 
+  allData: any[] = [];
   stat!: Ledger;
   submitted: boolean = false;
   statDialog: boolean=false;
@@ -59,9 +60,9 @@ export class LedgerComponent {
   
 
  focValues: any[] = [
-  { name: 'Marondera', id: 'MaronderaFocId' },
-  { name: 'Mahusekwa', id: 'MahusekwaFocId' },
-  { name: 'Murehwa', id: 'MurehwaFocId' }
+  { name: 'Marondera', id: '001' },
+  { name: 'Mahusekwa', id: '002' },
+  { name: 'Murehwa', id: '003' }
 ];
 
  focValue: any = null;
@@ -110,12 +111,12 @@ createCollectionId(date: Date): string {
     this.statDialog = true;
   }
   async ngOnInit() {
-     this.getData.getAll('offering').subscribe((data) => {
+     this.getData.getAll('myReports').subscribe((data) => {
        console.log(data);
-      //  this.stats = data
+        this.stats = data
      });
-   this.getAllData()
   }
+
   
   async getAllData(){
     await this.getData.getAllReports().then((data) => {
@@ -126,9 +127,9 @@ createCollectionId(date: Date): string {
   }
 
   async getFilteredData(){
-    await this.getData.getFilteredReports(this.focValue, this.filterDate).then((data) => {
-      console.log(this.focValue);
-      console.log(this.filterDate);
+    console.log(this.focValue);
+    console.log(this.filterDate);
+    await this.getData.getFilteredReports(this.focValue.id, this.filterDate).then((data) => {
       this.stats=data
     });
   }

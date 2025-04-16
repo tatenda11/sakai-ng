@@ -5,11 +5,11 @@
             <div class="flex flex-wrap items-start gap-6">
                 <div class="field">
                     <label for="firstname1" class="sr-only">FOC</label>
-                    <p-listbox [(ngModel)]="focValue" [options]="focValues" optionLabel="name" [filter]="true" />
+                    <p-listbox id="focValue" [(ngModel)]="focValue" [options]="focValues" optionLabel="name" [filter]="true" />
                 </div>
                 <div class="field">
                     <label for="lastname1" class="sr-only">Date</label>
-                    <input type="date" pInputText id="reportDate"  required autofocus fluid />
+                    <input type="date"  [(ngModel)]="filterDate" pInputText id="reportDate"  required autofocus fluid />
                 </div>
                 <p-button label="Filter" [fluid]="false" (onClick)="getFilteredData()"></p-button>
             </div>
@@ -97,13 +97,13 @@
         </ng-template>
         <ng-template #body let-stat>
             <tr>
-                <td pFrozenColumn class="font-bold">{{ stat.location }}</td>
+                <td pFrozenColumn class="font-bold">{{ stat.name }}</td>
                 <td>{{ stat.province }}</td>
                 <td>{{ stat.date }}</td>
-                <td style="min-width:100px" style="text-align:right">{{ stat.attendanceAdults }}</td>
-                <td style="min-width:100px" style="text-align:right">{{ stat.attendanceChildren }}</td>
-                <td style="text-align:right">{{ stat.tithe | currency }}</td>
-                <td style="text-align:right">{{ stat.offeringSeed | currency }}</td>
+                <td style="min-width:100px" style="text-align:right">{{ stat.attendance.adults }}</td>
+                <td style="min-width:100px" style="text-align:right">{{ stat.attendance.children }}</td>
+                <td style="text-align:right">{{ stat.tithes.USD | currency }}</td>
+                <td style="text-align:right">{{ stat.offering.USD | currency }}</td>
                 <!-- <td style="text-align:right">{{ stat.other }}</td>  -->
                
             </tr>

@@ -106,9 +106,9 @@ export class GetDataService {
       try {
         const filterDate = new Date(date);
         const q = query(
-          collection(this.firestore, 'reports'),
+          collection(this.firestore, 'myReports'),
          // where("date", "==", filterDate),
-          where("MaronderaFocId", "==", focId),
+          where("focId", "==", focId),
         );
         const reportsSnapshot = await getDocs(q);
         const allReports = reportsSnapshot.docs.map(doc => ({
